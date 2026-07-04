@@ -36,7 +36,7 @@ object UnitConverter {
         )
     )
 
-    private val currencyRates = mapOf(
+    val currencyRates = mutableMapOf(
         "USD" to 1.0,
         "INR" to 83.12,
         "EUR" to 0.92,

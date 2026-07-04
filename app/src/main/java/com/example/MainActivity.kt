@@ -1078,10 +1078,20 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
         }
         
         // Refresh indicator / Updating rates
+        val context = LocalContext.current
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 4.dp),
+                .padding(vertical = 4.dp)
+                .let {
+                    if (viewModel.converterCategory == UnitConverter.Category.CURRENCY) {
+                        it.clickable(enabled = !viewModel.isUpdatingRates) {
+                            viewModel.triggerRatesUpdate(context)
+                        }
+                    } else {
+                        it
+                    }
+                },
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -1100,7 +1110,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = if (viewModel.isUpdatingRates) "Updating rates..." else "Rates updated",
+                    text = if (viewModel.isUpdatingRates) "Updating rates..." else "Rates updated (click to refresh)",
                     color = NothingTextGray,
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace

@@ -14,6 +14,8 @@ import com.example.data.HistoryRepository
 import com.example.util.CalculatorEvaluator
 import com.example.util.UnitConverter
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -221,11 +223,61 @@ class CalculatorViewModel(
         updateConversion()
     }
 
-    fun triggerRatesUpdate() {
-        viewModelScope.launch {
+    fun triggerRatesUpdate(context: android.content.Context? = null) {
+        viewModelScope.launch(Dispatchers.IO) {
             isUpdatingRates = true
-            delay(800) // Brief simulated network update delay
-            isUpdatingRates = false
+            try {
+                val client = okhttp3.OkHttpClient.Builder()
+                    .connectTimeout(5, java.util.concurrent.TimeUnit.SECONDS)
+                    .readTimeout(5, java.util.concurrent.TimeUnit.SECONDS)
+                    .build()
+                val request = okhttp3.Request.Builder()
+                    .url("https://open.er-api.com/v6/latest/USD")
+                    .build()
+                
+                client.newCall(request).execute().use { response ->
+                    if (response.isSuccessful) {
+                        val bodyString = response.body?.string()
+                        if (bodyString != null) {
+                            val jsonObject = org.json.JSONObject(bodyString)
+                            if (jsonObject.getString("result") == "success") {
+                                val ratesObj = jsonObject.getJSONObject("rates")
+                                val keys = ratesObj.keys()
+                                while (keys.hasNext()) {
+                                    val key = keys.next()
+                                    if (UnitConverter.currencyRates.containsKey(key)) {
+                                        val rate = ratesObj.getDouble(key)
+                                        UnitConverter.currencyRates[key] = rate
+                                    }
+                                }
+                                withContext(Dispatchers.Main) {
+                                    updateConversion()
+                                    context?.let {
+                                        android.widget.Toast.makeText(it, "Exchange rates updated successfully!", android.widget.Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            context?.let {
+                                android.widget.Toast.makeText(it, "Failed to update rates. Server error.", android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    context?.let {
+                        android.widget.Toast.makeText(it, "Connection error: Using offline rates", android.widget.Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    isUpdatingRates = false
+                }
+            }
         }
     }
 
