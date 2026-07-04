@@ -1,0 +1,70 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Outer Squircle outline -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 32,22 C 24,22 22,24 22,32 L 22,76 C 22,84 24,86 32,86 L 76,86 C 84,86 86,84 86,76 L 86,32 C 86,24 84,22 76,22 Z" />
+
+    <!-- Thin inner concentric squircle decorative line on right (like reference) -->
+    <path
+        android:strokeColor="#8E8E93"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:pathData="M 81,38 L 81,42 M 81,45 L 81,49 M 81,52 L 81,72" />
+
+    <!-- Calculator Device Body -->
+    <path
+        android:fillColor="#1C1C1E"
+        android:pathData="M 44,32 C 40,32 38,34 38,38 L 38,70 C 38,74 40,76 44,76 L 64,76 C 68,76 70,74 70,70 L 70,38 C 70,34 68,32 64,32 Z" />
+
+    <!-- Calculator Screen -->
+    <path
+        android:fillColor="#636366"
+        android:pathData="M 42,37 C 41,37 40.5,37.5 40.5,38.5 L 40.5,45.5 C 40.5,46.5 41,47 42,47 L 66,47 C 67,47 67.5,46.5 67.5,45.5 L 67.5,38.5 C 67.5,37.5 67,37 66,37 Z" />
+
+    <!-- Row 1 Buttons -->
+    <!-- Col 1 -->
+    <path
+        android:fillColor="#C7C7CC"
+        android:pathData="M 44.5,50 A 2.5,2.5 0 1,1 49.5,50 A 2.5,2.5 0 1,1 44.5,50" />
+    <!-- Col 2 -->
+    <path
+        android:fillColor="#C7C7CC"
+        android:pathData="M 52.5,50 A 2.5,2.5 0 1,1 57.5,50 A 2.5,2.5 0 1,1 52.5,50" />
+    <!-- Col 3 -->
+    <path
+        android:fillColor="#FF9F0A"
+        android:pathData="M 60.5,50 A 2.5,2.5 0 1,1 65.5,50 A 2.5,2.5 0 1,1 60.5,50" />
+
+    <!-- Row 2 Buttons -->
+    <!-- Col 1 -->
+    <path
+        android:fillColor="#C7C7CC"
+        android:pathData="M 44.5,58 A 2.5,2.5 0 1,1 49.5,58 A 2.5,2.5 0 1,1 44.5,58" />
+    <!-- Col 2 -->
+    <path
+        android:fillColor="#C7C7CC"
+        android:pathData="M 52.5,58 A 2.5,2.5 0 1,1 57.5,58 A 2.5,2.5 0 1,1 52.5,58" />
+    <!-- Col 3 -->
+    <path
+        android:fillColor="#FF9F0A"
+        android:pathData="M 60.5,58 A 2.5,2.5 0 1,1 65.5,58 A 2.5,2.5 0 1,1 60.5,58" />
+
+    <!-- Row 3 Buttons -->
+    <!-- Col 1 & 2 Pill-shaped Button (like zero button in Apple/Standard layout / reference) -->
+    <path
+        android:fillColor="#C7C7CC"
+        android:pathData="M 44.5,66 C 43.0,66 43.0,71 44.5,71 L 55.5,71 C 57.0,71 57.0,66 55.5,66 Z" />
+    <!-- Col 3 -->
+    <path
+        android:fillColor="#FF9F0A"
+        android:pathData="M 60.5,66 A 2.5,2.5 0 1,1 65.5,66 A 2.5,2.5 0 1,1 60.5,66" />
+
+</vector>

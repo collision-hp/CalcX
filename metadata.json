@@ -1,0 +1,6 @@
+{
+  "name": "CalcX",
+  "description": "A fully functional mobile calculator themed after Nothing OS design language.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
