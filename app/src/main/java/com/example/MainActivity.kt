@@ -33,6 +33,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import android.view.HapticFeedbackConstants
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -182,6 +184,7 @@ fun TopHeaderRow(
     onTabSelect: (String) -> Unit,
     onHistoryClick: () -> Unit
 ) {
+    val view = LocalView.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -205,7 +208,10 @@ fun TopHeaderRow(
                     modifier = Modifier
                         .clip(RoundedCornerShape(50))
                         .background(if (isActive) NothingRed else Color.Transparent)
-                        .clickable { onTabSelect(tab) }
+                        .clickable {
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                            onTabSelect(tab)
+                        }
                         .padding(horizontal = 14.dp, vertical = 8.dp)
                 ) {
                     Text(
@@ -226,7 +232,10 @@ fun TopHeaderRow(
                 .clip(CircleShape)
                 .background(NothingDarkGray)
                 .border(1.dp, NothingLightGray, CircleShape)
-                .clickable(onClick = onHistoryClick),
+                .clickable {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    onHistoryClick()
+                },
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -273,6 +282,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     onClick = { viewModel.onCalculatorButtonClick("AC") },
                     modifier = Modifier.weight(1f),
                     isBold = true,
+                    fontSize = 32.sp,
                     testTag = "btn_ac"
                 )
                 NothingButton(
@@ -281,6 +291,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     textColor = NothingTextWhite,
                     onClick = { viewModel.onCalculatorButtonClick("%") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 34.sp,
                     testTag = "btn_percent"
                 )
                 NothingButton(
@@ -289,6 +300,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     textColor = NothingTextWhite,
                     onClick = { viewModel.onCalculatorButtonClick("()") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 34.sp,
                     testTag = "btn_parens"
                 )
                 NothingButton(
@@ -297,7 +309,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     textColor = NothingRed,
                     onClick = { viewModel.onCalculatorButtonClick("÷") },
                     modifier = Modifier.weight(1f),
-                    fontSize = 24.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_divide"
                 )
             }
@@ -311,18 +323,21 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     text = "7",
                     onClick = { viewModel.onCalculatorButtonClick("7") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_7"
                 )
                 NothingButton(
                     text = "8",
                     onClick = { viewModel.onCalculatorButtonClick("8") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_8"
                 )
                 NothingButton(
                     text = "9",
                     onClick = { viewModel.onCalculatorButtonClick("9") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_9"
                 )
                 NothingButton(
@@ -331,7 +346,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     textColor = NothingRed,
                     onClick = { viewModel.onCalculatorButtonClick("×") },
                     modifier = Modifier.weight(1f),
-                    fontSize = 24.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_multiply"
                 )
             }
@@ -345,18 +360,21 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     text = "4",
                     onClick = { viewModel.onCalculatorButtonClick("4") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_4"
                 )
                 NothingButton(
                     text = "5",
                     onClick = { viewModel.onCalculatorButtonClick("5") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_5"
                 )
                 NothingButton(
                     text = "6",
                     onClick = { viewModel.onCalculatorButtonClick("6") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_6"
                 )
                 NothingButton(
@@ -365,7 +383,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     textColor = NothingRed,
                     onClick = { viewModel.onCalculatorButtonClick("−") },
                     modifier = Modifier.weight(1f),
-                    fontSize = 24.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_subtract"
                 )
             }
@@ -379,18 +397,21 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     text = "1",
                     onClick = { viewModel.onCalculatorButtonClick("1") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_1"
                 )
                 NothingButton(
                     text = "2",
                     onClick = { viewModel.onCalculatorButtonClick("2") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_2"
                 )
                 NothingButton(
                     text = "3",
                     onClick = { viewModel.onCalculatorButtonClick("3") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_3"
                 )
                 NothingButton(
@@ -399,7 +420,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     textColor = NothingRed,
                     onClick = { viewModel.onCalculatorButtonClick("+") },
                     modifier = Modifier.weight(1f),
-                    fontSize = 24.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_add"
                 )
             }
@@ -413,18 +434,21 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     text = "0",
                     onClick = { viewModel.onCalculatorButtonClick("0") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_0"
                 )
                 NothingButton(
                     text = ".",
                     onClick = { viewModel.onCalculatorButtonClick(".") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 36.sp,
                     testTag = "btn_dot"
                 )
                 NothingButton(
                     text = "⌫",
                     onClick = { viewModel.onCalculatorButtonClick("⌫") },
                     modifier = Modifier.weight(1f),
+                    fontSize = 32.sp,
                     testTag = "btn_backspace"
                 )
                 NothingButton(
@@ -433,7 +457,7 @@ fun SimpleCalculatorScreen(viewModel: CalculatorViewModel) {
                     textColor = NothingBlack,
                     onClick = { viewModel.onCalculatorButtonClick("=") },
                     modifier = Modifier.weight(1f),
-                    fontSize = 24.sp,
+                    fontSize = 42.sp,
                     isBold = true,
                     testTag = "btn_equals"
                 )
@@ -512,7 +536,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
             ) {
                 NothingButton(
                     text = "DEG\nRAD",
-                    fontSize = 11.sp,
+                    fontSize = 18.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = if (viewModel.isDegree) NothingRed else NothingTextWhite,
                     onClick = { viewModel.onCalculatorButtonClick("DEG/RAD") },
@@ -522,7 +546,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "INV",
-                    fontSize = 12.sp,
+                    fontSize = 24.sp,
                     backgroundColor = if (viewModel.isInverse) NothingMutedRed else NothingButtonGray,
                     textColor = if (viewModel.isInverse) NothingRed else NothingTextWhite,
                     onClick = { viewModel.onCalculatorButtonClick("INV") },
@@ -532,6 +556,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "⌫",
+                    fontSize = 32.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextWhite,
                     onClick = { viewModel.onCalculatorButtonClick("⌫") },
@@ -541,6 +566,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "()",
+                    fontSize = 34.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextWhite,
                     onClick = { viewModel.onCalculatorButtonClick("()") },
@@ -550,6 +576,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "AC",
+                    fontSize = 32.sp,
                     backgroundColor = NothingRed,
                     textColor = NothingTextWhite,
                     onClick = { viewModel.onCalculatorButtonClick("AC") },
@@ -567,7 +594,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
             ) {
                 NothingButton(
                     text = if (viewModel.isInverse) "asin" else "sin",
-                    fontSize = 13.sp,
+                    fontSize = 24.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick(if (viewModel.isInverse) "asin(" else "sin(") },
@@ -577,7 +604,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = if (viewModel.isInverse) "acos" else "cos",
-                    fontSize = 13.sp,
+                    fontSize = 24.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick(if (viewModel.isInverse) "acos(" else "cos(") },
@@ -587,7 +614,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = if (viewModel.isInverse) "atan" else "tan",
-                    fontSize = 13.sp,
+                    fontSize = 24.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick(if (viewModel.isInverse) "atan(" else "tan(") },
@@ -597,7 +624,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "x^y",
-                    fontSize = 14.sp,
+                    fontSize = 26.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingRed,
                     onClick = { viewModel.onCalculatorButtonClick("^") },
@@ -612,7 +639,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                     onClick = { viewModel.onCalculatorButtonClick("÷") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
-                    fontSize = 20.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_sci_divide"
                 )
             }
@@ -624,6 +651,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
             ) {
                 NothingButton(
                     text = "π",
+                    fontSize = 34.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick("π") },
@@ -633,6 +661,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "7",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("7") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -640,6 +669,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "8",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("8") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -647,6 +677,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "9",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("9") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -659,7 +690,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                     onClick = { viewModel.onCalculatorButtonClick("×") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
-                    fontSize = 20.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_sci_multiply"
                 )
             }
@@ -671,6 +702,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
             ) {
                 NothingButton(
                     text = "e",
+                    fontSize = 34.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick("e") },
@@ -680,6 +712,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "4",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("4") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -687,6 +720,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "5",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("5") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -694,6 +728,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "6",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("6") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -706,7 +741,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                     onClick = { viewModel.onCalculatorButtonClick("−") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
-                    fontSize = 20.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_sci_subtract"
                 )
             }
@@ -718,6 +753,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
             ) {
                 NothingButton(
                     text = "ln",
+                    fontSize = 24.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick("ln(") },
@@ -727,6 +763,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "1",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("1") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -734,6 +771,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "2",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("2") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -741,6 +779,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "3",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("3") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -753,7 +792,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                     onClick = { viewModel.onCalculatorButtonClick("+") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
-                    fontSize = 20.sp,
+                    fontSize = 42.sp,
                     testTag = "btn_sci_add"
                 )
             }
@@ -765,6 +804,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
             ) {
                 NothingButton(
                     text = "log",
+                    fontSize = 24.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick("log(") },
@@ -774,6 +814,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "√",
+                    fontSize = 34.sp,
                     backgroundColor = NothingButtonGray,
                     textColor = NothingTextGray,
                     onClick = { viewModel.onCalculatorButtonClick("√(") },
@@ -783,6 +824,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = "0",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick("0") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -790,6 +832,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                 )
                 NothingButton(
                     text = ".",
+                    fontSize = 36.sp,
                     onClick = { viewModel.onCalculatorButtonClick(".") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
@@ -802,7 +845,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
                     onClick = { viewModel.onCalculatorButtonClick("=") },
                     modifier = Modifier.weight(1f),
                     isCircle = false,
-                    fontSize = 20.sp,
+                    fontSize = 42.sp,
                     isBold = true,
                     testTag = "btn_sci_equals"
                 )
@@ -814,6 +857,7 @@ fun ScientificCalculatorScreen(viewModel: CalculatorViewModel) {
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ConverterScreen(viewModel: CalculatorViewModel) {
+    val view = LocalView.current
     var fromMenuOpen by remember { mutableStateOf(false) }
     var toMenuOpen by remember { mutableStateOf(false) }
     
@@ -844,7 +888,10 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                         color = if (isFromActive) NothingRed else NothingLightGray,
                         shape = RoundedCornerShape(16.dp)
                     )
-                    .clickable { viewModel.activeConverterRow = "from" }
+                    .clickable {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        viewModel.activeConverterRow = "from"
+                    }
                     .padding(14.dp)
             ) {
                 Row(
@@ -859,7 +906,10 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                             modifier = Modifier
                                 .clip(RoundedCornerShape(10.dp))
                                 .background(NothingLightGray)
-                                .clickable { fromMenuOpen = true }
+                                .clickable {
+                                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                    fromMenuOpen = true
+                                }
                                 .padding(horizontal = 12.dp, vertical = 10.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -867,7 +917,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                                 Text(
                                     text = viewModel.fromUnit,
                                     color = NothingTextWhite,
-                                    fontSize = 16.sp,
+                                    fontSize = 18.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace
                                 )
@@ -904,6 +954,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                                         }
                                     },
                                     onClick = {
+                                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                         viewModel.fromUnit = option.code
                                         fromMenuOpen = false
                                         viewModel.selectConverterCategory(viewModel.converterCategory)
@@ -915,9 +966,9 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                     
                     // Right: Value (with auto scaling to avoid overlap)
                     val fromFontSize = when {
-                        viewModel.fromValueStr.length > 12 -> 18.sp
-                        viewModel.fromValueStr.length > 8 -> 24.sp
-                        else -> 32.sp
+                        viewModel.fromValueStr.length > 12 -> 20.sp
+                        viewModel.fromValueStr.length > 8 -> 28.sp
+                        else -> 36.sp
                     }
                     Text(
                         text = viewModel.fromValueStr,
@@ -956,7 +1007,10 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                         .clip(CircleShape)
                         .background(NothingDarkGray)
                         .border(1.dp, NothingLightGray, CircleShape)
-                        .clickable { viewModel.swapConverterUnits() },
+                        .clickable {
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                            viewModel.swapConverterUnits()
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
@@ -985,7 +1039,10 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                         color = if (isToActive) NothingRed else NothingLightGray,
                         shape = RoundedCornerShape(16.dp)
                     )
-                    .clickable { viewModel.activeConverterRow = "to" }
+                    .clickable {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        viewModel.activeConverterRow = "to"
+                    }
                     .padding(14.dp)
             ) {
                 Row(
@@ -1000,7 +1057,10 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                             modifier = Modifier
                                 .clip(RoundedCornerShape(10.dp))
                                 .background(NothingLightGray)
-                                .clickable { toMenuOpen = true }
+                                .clickable {
+                                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                    toMenuOpen = true
+                                }
                                 .padding(horizontal = 12.dp, vertical = 10.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -1008,7 +1068,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                                 Text(
                                     text = viewModel.toUnit,
                                     color = NothingTextWhite,
-                                    fontSize = 16.sp,
+                                    fontSize = 18.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FontFamily.Monospace
                                 )
@@ -1045,6 +1105,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                                         }
                                     },
                                     onClick = {
+                                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                         viewModel.toUnit = option.code
                                         toMenuOpen = false
                                         viewModel.selectConverterCategory(viewModel.converterCategory)
@@ -1056,9 +1117,9 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                     
                     // Right: Value (with auto scaling to avoid overlap)
                     val toFontSize = when {
-                        viewModel.toValueStr.length > 12 -> 18.sp
-                        viewModel.toValueStr.length > 8 -> 24.sp
-                        else -> 32.sp
+                        viewModel.toValueStr.length > 12 -> 20.sp
+                        viewModel.toValueStr.length > 8 -> 28.sp
+                        else -> 36.sp
                     }
                     Text(
                         text = viewModel.toValueStr,
@@ -1086,6 +1147,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                 .let {
                     if (viewModel.converterCategory == UnitConverter.Category.CURRENCY) {
                         it.clickable(enabled = !viewModel.isUpdatingRates) {
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             viewModel.triggerRatesUpdate(context)
                         }
                     } else {
@@ -1138,10 +1200,10 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                     .padding(bottom = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                CategoryPill(UnitConverter.Category.CURRENCY, "CURR", viewModel, Modifier.weight(1f))
-                CategoryPill(UnitConverter.Category.LENGTH, "LEN", viewModel, Modifier.weight(1f))
-                CategoryPill(UnitConverter.Category.WEIGHT, "WGT", viewModel, Modifier.weight(1f))
-                CategoryPill(UnitConverter.Category.TEMPERATURE, "TEMP", viewModel, Modifier.weight(1f))
+                CategoryPill(UnitConverter.Category.CURRENCY, "CURRENCY", viewModel, Modifier.weight(1f))
+                CategoryPill(UnitConverter.Category.LENGTH, "LENGTH", viewModel, Modifier.weight(1f))
+                CategoryPill(UnitConverter.Category.WEIGHT, "WEIGHT", viewModel, Modifier.weight(1f))
+                CategoryPill(UnitConverter.Category.TEMPERATURE, "TEMPERATURE", viewModel, Modifier.weight(1f))
             }
             
             // Highly Organized 4-Column Keypad with compact custom heights
@@ -1174,6 +1236,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                                 modifier = Modifier.weight(2f),
                                 isCircle = false,
                                 isBold = false,
+                                fontSize = 36.sp,
                                 aspectRatio = 3.2f, // Perfectly proportioned to match other rows
                                 testTag = "btn_conv_0"
                             )
@@ -1187,6 +1250,10 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                                     else -> NothingButtonGray
                                 }
                                 val btnFg = NothingTextWhite
+                                val fontSize = when (char) {
+                                    "AC", "⌫" -> 32.sp
+                                    else -> 36.sp
+                                }
                                 
                                 NothingButton(
                                     text = char,
@@ -1196,6 +1263,7 @@ fun ConverterScreen(viewModel: CalculatorViewModel) {
                                     modifier = Modifier.weight(1f),
                                     isCircle = false,
                                     isBold = isActionKey,
+                                    fontSize = fontSize,
                                     aspectRatio = 1.6f, // Perfect height ratio to prevent vertical overlap
                                     testTag = "btn_conv_$char"
                                 )
@@ -1216,13 +1284,17 @@ fun CategoryPill(
     modifier: Modifier = Modifier
 ) {
     val isSelected = viewModel.converterCategory == category
+    val view = LocalView.current
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
             .background(if (isSelected) NothingRed else NothingDarkGray)
             .border(1.dp, if (isSelected) NothingRed else NothingLightGray, RoundedCornerShape(12.dp))
-            .clickable { viewModel.selectConverterCategory(category) }
-            .padding(vertical = 10.dp),
+            .clickable {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                viewModel.selectConverterCategory(category)
+            }
+            .padding(vertical = 10.dp, horizontal = 2.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -1230,7 +1302,9 @@ fun CategoryPill(
             color = if (isSelected) NothingTextWhite else NothingTextGray,
             fontWeight = FontWeight.Bold,
             fontSize = 10.sp,
-            fontFamily = FontFamily.Monospace
+            fontFamily = FontFamily.Monospace,
+            maxLines = 1,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -1283,7 +1357,7 @@ fun DisplayArea(
                 Text(
                     text = lastExpression,
                     color = NothingTextGray,
-                    fontSize = 16.sp,
+                    fontSize = 24.sp,
                     fontFamily = FontFamily.Monospace,
                     textAlign = TextAlign.End,
                     maxLines = 1,
@@ -1297,10 +1371,10 @@ fun DisplayArea(
             
             // Dynamic text resizing based on length to prevent overflows
             val fontSize = when {
-                currentDisplayText.length > 16 -> 24.sp
-                currentDisplayText.length > 12 -> 32.sp
-                currentDisplayText.length > 8 -> 42.sp
-                else -> 52.sp
+                currentDisplayText.length > 16 -> 34.sp
+                currentDisplayText.length > 12 -> 44.sp
+                currentDisplayText.length > 8 -> 56.sp
+                else -> 72.sp
             }
             
             Text(
@@ -1326,10 +1400,11 @@ fun NothingButton(
     textColor: Color = NothingTextWhite,
     isCircle: Boolean = true,
     isBold: Boolean = false,
-    fontSize: TextUnit = 20.sp,
+    fontSize: TextUnit = 28.sp,
     aspectRatio: Float? = null,
     testTag: String = ""
 ) {
+    val view = LocalView.current
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     
@@ -1369,7 +1444,10 @@ fun NothingButton(
             .clickable(
                 interactionSource = interactionSource,
                 indication = null, // Disable default system indications for custom tactile feedback
-                onClick = onClick
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    onClick()
+                }
             )
     ) {
         Text(
@@ -1388,6 +1466,7 @@ fun HistoryOverlay(
     viewModel: CalculatorViewModel,
     onClose: () -> Unit
 ) {
+    val view = LocalView.current
     val historyList by viewModel.historyState.collectAsStateWithLifecycle()
     
     Column(
@@ -1418,7 +1497,10 @@ fun HistoryOverlay(
                     .size(40.dp)
                     .clip(CircleShape)
                     .background(NothingDarkGray)
-                    .clickable(onClick = onClose),
+                    .clickable {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        onClose()
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -1469,6 +1551,7 @@ fun HistoryOverlay(
                             .background(NothingDarkGray)
                             .border(1.dp, NothingLightGray, RoundedCornerShape(12.dp))
                             .clickable {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 viewModel.loadHistoryEntry(entry)
                                 onClose()
                             }
@@ -1504,7 +1587,10 @@ fun HistoryOverlay(
                     .padding(top = 16.dp)
                     .clip(RoundedCornerShape(50))
                     .background(NothingRed)
-                    .clickable { viewModel.clearHistory() }
+                    .clickable {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        viewModel.clearHistory()
+                    }
                     .padding(vertical = 14.dp),
                 contentAlignment = Alignment.Center
             ) {

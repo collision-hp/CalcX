@@ -4,31 +4,26 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- 1. White Circle Base (Centered at 54, 54 with Radius 36) -->
+    <!-- 1. Top-Left Circle (Centered at 42.5, 42.5 with Radius 7) -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M 54,54 m -36,0 a 36,36 0 1,0 72,0 a 36,36 0 1,0 -72,0" />
-
-    <!-- 2. Red Circle (Top-Left, centered at 42.5, 42.5 with Radius 7) -->
-    <path
-        android:fillColor="#E53935"
+        android:fillColor="#FF000000"
         android:pathData="M 42.5,42.5 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
 
-    <!-- 3. Black Plus Symbol (Top-Right, centered at 65.5, 42.5) -->
+    <!-- 2. Top-Right Plus Symbol (Centered at 65.5, 42.5) -->
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="#FF000000"
         android:strokeWidth="5.5"
         android:strokeLineCap="round"
         android:pathData="M 65.5,35.5 L 65.5,49.5 M 58.5,42.5 L 72.5,42.5" />
 
-    <!-- 4. Black Rounded Square / Squircle Keycap (Bottom-Left, centered at 42.5, 65.5) -->
+    <!-- 3. Bottom-Left Rounded Square / Keycap (Centered at 42.5, 65.5) -->
     <path
-        android:fillColor="#000000"
+        android:fillColor="#FF000000"
         android:pathData="M 39.5,58.5 L 45.5,58.5 a 4,4 0 0,1 4,4 L 49.5,68.5 a 4,4 0 0,1 -4,4 L 39.5,72.5 a 4,4 0 0,1 -4,-4 L 35.5,68.5 a 4,4 0 0,1 4,-4 Z" />
 
-    <!-- 5. Black Equals Symbol (Bottom-Right, centered at 65.5, 65.5) -->
+    <!-- 4. Bottom-Right Equals Symbol (Centered at 65.5, 65.5) -->
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="#FF000000"
         android:strokeWidth="4.5"
         android:strokeLineCap="round"
         android:pathData="M 61,62 L 70,62 M 61,69 L 70,69" />
